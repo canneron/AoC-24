@@ -10,6 +10,38 @@ import (
 	"strings"
 )
 
+func part1(l1 []float64, l2 []float64) {
+	sort.Float64s(l1)
+	sort.Float64s(l2)
+
+	sum := 0.0
+	for i := 0; i < len(l1); i++ {
+		sum += (math.Abs(l1[i] - l2[i]))
+	}
+
+	fmt.Println(int(sum))
+}
+
+func part2(l1 []float64, l2 []float64) {
+	intCount := make(map[float64]int)
+
+	for i := range l2 {
+		_, ok := intCount[l2[i]]
+		if ok {
+			intCount[l2[i]]++
+		} else {
+			intCount[l2[i]] = 1
+		}
+	}
+
+	sum := 0
+	for num := range l1 {
+		sum += int(l1[num]) * intCount[l1[num]]
+	}
+
+	fmt.Println(sum)
+}
+
 func main() {
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -41,13 +73,6 @@ func main() {
 		}
 	}
 
-	sort.Float64s(l1)
-	sort.Float64s(l2)
-
-	sum := 0.0
-	for i := 0; i < len(l1); i++ {
-		sum += (math.Abs(l1[i] - l2[i]))
-	}
-
-	fmt.Println(int(sum))
+	part1(l1, l2)
+	part2(l1, l2)
 }
