@@ -44,9 +44,6 @@ func searchGrid2(grid [][]rune, start []int) int {
 			d = directions[mod]
 		}
 
-		// fmt.Println("-----")
-		// fmt.Println(x, y)
-		// fmt.Println(visited[state])
 		x += d[0]
 		y += d[1]
 	}
